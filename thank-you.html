@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Thank you · Claire Loh Real Estate</title>
+<meta name="robots" content="noindex">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:opsz,wght@6..96,400..700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --paper:#E7EAE4; --card:#F3F4F0; --ink:#131B1A;
+  --ink-70:rgba(19,27,26,.70); --ink-45:rgba(19,27,26,.45); --rule:rgba(19,27,26,.15);
+  --petrol:#0E3239; --petrol-lift:#17444C; --ochre:#BC6B18; --chalk:#EFF1EC;
+  --sans:"Poppins",system-ui,-apple-system,sans-serif;
+  --brand:"Bodoni Moda",Didot,"Times New Roman",serif;
+  --gut:clamp(20px,5vw,64px);
+}
+*{box-sizing:border-box}
+html,body{margin:0;min-height:100%}
+body{
+  background:var(--paper);color:var(--ink);font-family:var(--sans);
+  font-size:17px;line-height:1.7;-webkit-font-smoothing:antialiased;
+  display:flex;flex-direction:column;min-height:100vh;
+}
+a{color:inherit}
+
+.nav{border-bottom:1px solid var(--rule)}
+.nav__in{max-width:1400px;margin:0 auto;padding:16px var(--gut);display:flex;align-items:center;justify-content:space-between;gap:20px}
+.brand{display:flex;align-items:baseline;gap:9px;text-decoration:none}
+.brand__mark{font-family:var(--brand);font-variation-settings:"opsz" 22;font-weight:600;font-size:22px;line-height:1}
+.brand__sub{font-size:10px;font-weight:500;letter-spacing:.2em;text-transform:uppercase;color:var(--ink-45)}
+.back{font-size:13px;text-decoration:none;color:var(--ink-70);border-bottom:1px solid transparent;transition:border-color .2s,color .2s}
+.back:hover{color:var(--ink);border-bottom-color:var(--ochre)}
+
+main{flex:1;display:flex;align-items:center;padding:clamp(56px,9vw,120px) var(--gut)}
+.wrap{max-width:760px;margin:0 auto;width:100%}
+
+.tick{
+  width:58px;height:58px;border-radius:50%;background:var(--petrol);
+  display:flex;align-items:center;justify-content:center;margin-bottom:30px;
+  opacity:0;transform:scale(.7);animation:pop .6s cubic-bezier(.2,.9,.3,1.3) .1s forwards;
+}
+.tick svg{width:26px;height:26px}
+.tick path{stroke:var(--chalk);stroke-width:2.4;fill:none;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:30;stroke-dashoffset:30;animation:draw .5s ease .5s forwards}
+@keyframes pop{to{opacity:1;transform:none}}
+@keyframes draw{to{stroke-dashoffset:0}}
+
+.eyebrow{display:block;font-size:11px;font-weight:500;letter-spacing:.22em;text-transform:uppercase;color:var(--ochre);margin-bottom:14px}
+h1{font-size:clamp(38px,6vw,64px);font-weight:600;letter-spacing:-.032em;line-height:1.06;margin:0;text-wrap:balance}
+.lede{font-size:clamp(19px,2.2vw,23px);font-weight:300;line-height:1.56;color:var(--ink-70);margin:22px 0 0;max-width:44ch}
+
+.next{margin-top:clamp(40px,5vw,56px);background:var(--card);border-radius:18px;padding:clamp(24px,3.4vw,34px)}
+.next__k{font-size:11px;font-weight:500;letter-spacing:.16em;text-transform:uppercase;color:var(--ink-45);margin:0 0 18px}
+.steps{list-style:none;margin:0;padding:0}
+.steps li{display:flex;gap:16px;padding:14px 0;border-top:1px solid var(--rule)}
+.steps li:first-child{border-top:none;padding-top:0}
+.steps b{flex:0 0 auto;font-size:22px;font-weight:600;letter-spacing:-.03em;line-height:1.2;color:var(--ochre);min-width:30px}
+.steps span{font-size:16px;line-height:1.62;color:var(--ink-70)}
+
+.cta{display:flex;flex-wrap:wrap;gap:12px;margin-top:30px}
+.btn{
+  display:inline-flex;align-items:center;gap:10px;text-decoration:none;
+  font-size:12px;font-weight:500;letter-spacing:.12em;text-transform:uppercase;
+  padding:16px 24px;border-radius:100px;background:var(--petrol);color:var(--chalk);
+  transition:transform .2s cubic-bezier(.2,.8,.3,1),background .2s;
+}
+.btn:hover{background:var(--petrol-lift);transform:translateY(-2px)}
+.btn--ghost{background:transparent;color:var(--ink);box-shadow:inset 0 0 0 1px var(--rule)}
+.btn--ghost:hover{background:rgba(19,27,26,.05)}
+.btn svg{width:16px;height:16px;flex:0 0 auto}
+
+.sign{margin-top:38px;font-family:var(--brand);font-variation-settings:"opsz" 30;font-size:26px;font-weight:500}
+
+.foot{background:var(--petrol);color:rgba(239,241,236,.55)}
+.foot__in{max-width:1400px;margin:0 auto;padding:22px var(--gut);font-size:12px;display:flex;justify-content:space-between;gap:14px;flex-wrap:wrap}
+
+:focus-visible{outline:2px solid var(--ochre);outline-offset:3px;border-radius:4px}
+@media(max-width:560px){
+  .brand__sub{display:none}
+  .btn{width:100%;justify-content:center}
+}
+@media(prefers-reduced-motion:reduce){
+  .tick{animation:none;opacity:1;transform:none}
+  .tick path{animation:none;stroke-dashoffset:0}
+}
+</style>
+
+<!-- Meta Pixel Code -->
+<script>
+!function(f,b,e,v,n,t,s)
+{if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+n.queue=[];t=b.createElement(e);t.async=!0;
+t.src=v;s=b.getElementsByTagName(e)[0];
+s.parentNode.insertBefore(t,s)}(window, document,'script',
+'https://connect.facebook.net/en_US/fbevents.js');
+fbq('init', '2507394686442114');
+fbq('track', 'PageView');
+(function(){
+  // Reuse the event id created when the form was submitted so Meta counts
+  // ONE Lead, not one here and another on the form page. If someone opens
+  // this page directly there is no id, so no Lead is recorded.
+  var id = null;
+  try{ id = sessionStorage.getItem('fb_lead_event_id'); }catch(err){}
+  if(id){
+    fbq('track', 'Lead', {content_name: 'Property enquiry form'}, {eventID: id});
+    try{ sessionStorage.removeItem('fb_lead_event_id'); }catch(err){}
+  }
+})();
+</script>
+<!-- End Meta Pixel Code -->
+</head>
+<body>
+<noscript><img height="1" width="1" style="display:none"
+src="https://www.facebook.com/tr?id=2507394686442114&ev=PageView&noscript=1"
+/></noscript>
+
+<header class="nav">
+  <div class="nav__in">
+    <a class="brand" href="index.html">
+      <span class="brand__mark">Claire Loh</span>
+      <span class="brand__sub">Real Estate</span>
+    </a>
+    <a class="back" href="index.html">&larr; Back to site</a>
+  </div>
+</header>
+
+<main>
+  <div class="wrap">
+    <div class="tick" aria-hidden="true">
+      <svg viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>
+    </div>
+
+    <span class="eyebrow">Enquiry received</span>
+    <h1>Thank you — your details are in.</h1>
+    <p class="lede">I'll personally reach out, usually within one working day, to understand what you're trying to achieve.</p>
+
+    <div class="next">
+      <p class="next__k">What happens next</p>
+      <ol class="steps">
+        <li><b>01</b><span>I'll review what you've shared and get in touch by phone or WhatsApp.</span></li>
+        <li><b>02</b><span>We'll talk through your situation — what your property is doing for you today, and where you want to be.</span></li>
+        <li><b>03</b><span>You'll leave with a clear view of your options: to hold, sell, upgrade, or simply wait.</span></li>
+      </ol>
+    </div>
+
+    <div class="cta">
+      <a class="btn" href="https://wa.me/6591298431?text=Hi%20Claire%2C%20I%20just%20submitted%20an%20enquiry%20on%20your%20site." target="_blank" rel="noopener noreferrer">
+        <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm0 18.2a8.2 8.2 0 0 1-4.2-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8-.2-.1-.4-.1-.6.1l-.8 1c-.1.2-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.2-.4.2-.4.7-1.3.1-.1 0-.3 0-.4l-.8-1.8c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3 3 3 0 0 0-.9 2.2 5.2 5.2 0 0 0 1.1 2.7 11.8 11.8 0 0 0 4.5 4c1.7.7 2.3.8 3.2.6.5-.1 1.5-.6 1.7-1.2.2-.6.2-1.1.1-1.2l-.5-.3z"/></svg>
+        Message Claire on WhatsApp
+      </a>
+      <a class="btn btn--ghost" href="tel:+6591298431">Call +65 9129 8431</a>
+    </div>
+
+    <p class="sign">Claire Loh</p>
+  </div>
+</main>
+
+<footer class="foot">
+  <div class="foot__in">
+    <span>Claire Loh Real Estate &middot; Licensed Real Estate Salesperson &middot; CEA Reg. No. R057108G</span>
+    <a href="index.html" style="text-decoration:none">Return to the homepage</a>
+  </div>
+</footer>
+<script>
+(function(){
+  document.querySelectorAll('a[href*="wa.me"]').forEach(function(link){
+    link.addEventListener('click', function(){
+      if(typeof fbq !== 'function'){ return; }
+      try{
+        fbq('track', 'Lead', {content_name: 'WhatsApp click'},
+            {eventID: 'wa-' + Date.now() + '-' + Math.random().toString(36).slice(2, 8)});
+      }catch(err){}
+    });
+  });
+})();
+</script>
+</body>
+</html>
