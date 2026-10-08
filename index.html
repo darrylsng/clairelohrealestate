@@ -327,21 +327,6 @@ p{margin:0 0 1.05em}
 .field select option{background:#0E3239;color:var(--chalk)}
 .field__row{display:grid;grid-template-columns:1fr 1fr;gap:14px}
 @media(max-width:560px){.field__row{grid-template-columns:1fr}}
-.consent{display:flex;gap:12px;align-items:flex-start;margin:4px 0 16px}
-.consent input{
-  appearance:none;-webkit-appearance:none;flex:0 0 auto;width:20px;height:20px;margin:2px 0 0;
-  border:1px solid rgba(239,241,236,.4);border-radius:5px;background:rgba(14,50,57,.4);
-  cursor:pointer;position:relative;transition:background .2s,border-color .2s;
-}
-.consent input:checked{background:#E0A45A;border-color:#E0A45A}
-.consent input:checked::after{
-  content:"";position:absolute;left:6px;top:2px;width:5px;height:10px;
-  border:solid #0E3239;border-width:0 2px 2px 0;transform:rotate(45deg);
-}
-.consent label{font-size:13.5px;line-height:1.6;color:rgba(239,241,236,.72);cursor:pointer}
-.consent.is-missing input{border-color:#E0A45A;box-shadow:0 0 0 3px rgba(224,164,90,.22)}
-.consent__err{display:none;margin:-10px 0 14px;font-size:12.5px;color:#E0A45A}
-.consent__err.is-shown{display:block}
 .form__fine{font-family:var(--mono);font-size:10.5px;line-height:1.7;color:rgba(239,241,236,.5);margin:14px 0 0}
 .form .btn{width:100%;justify-content:center}
 .sent{display:none;text-align:center;padding:30px 10px}
@@ -474,12 +459,6 @@ p{margin:0 0 1.05em}
   border-color:var(--ochre);background:#fff;box-shadow:0 0 0 3px rgba(188,107,24,.12);
 }
 .lead-card .field select option{background:#fff;color:var(--ink)}
-.lead-card .consent input{border:1px solid rgba(19,27,26,.32);background:#FBFCFA}
-.lead-card .consent input:checked{background:var(--ochre);border-color:var(--ochre)}
-.lead-card .consent input:checked::after{border-color:#fff}
-.lead-card .consent label{color:var(--ink-70);font-size:12.5px;line-height:1.55}
-.lead-card .consent.is-missing input{box-shadow:0 0 0 3px rgba(188,107,24,.2)}
-.lead-card .consent__err{color:var(--ochre)}
 .lead-card .btn{width:100%;justify-content:center}
 @media(max-width:900px){
   .hero__grid{grid-template-columns:1fr;gap:34px}
@@ -670,22 +649,7 @@ h3{font-weight:600;letter-spacing:-.014em;line-height:1.34;font-size:clamp(19px,
   .btn--lg{font-size:13px;padding:17px 26px}
   .eyebrow{font-size:12px}
   .tag{font-size:11.5px}
-  .rail__note,.charts__note,.consent{display:flex;gap:12px;align-items:flex-start;margin:4px 0 16px}
-.consent input{
-  appearance:none;-webkit-appearance:none;flex:0 0 auto;width:20px;height:20px;margin:2px 0 0;
-  border:1px solid rgba(239,241,236,.4);border-radius:5px;background:rgba(14,50,57,.4);
-  cursor:pointer;position:relative;transition:background .2s,border-color .2s;
-}
-.consent input:checked{background:#E0A45A;border-color:#E0A45A}
-.consent input:checked::after{
-  content:"";position:absolute;left:6px;top:2px;width:5px;height:10px;
-  border:solid #0E3239;border-width:0 2px 2px 0;transform:rotate(45deg);
-}
-.consent label{font-size:13.5px;line-height:1.6;color:rgba(239,241,236,.72);cursor:pointer}
-.consent.is-missing input{border-color:#E0A45A;box-shadow:0 0 0 3px rgba(224,164,90,.22)}
-.consent__err{display:none;margin:-10px 0 14px;font-size:12.5px;color:#E0A45A}
-.consent__err.is-shown{display:block}
-.form__fine{font-size:13px}
+  .rail__note,.charts__note,.form__fine{font-size:13px}
   .field input,.field select,.field textarea{font-size:16.5px}
   .field label{font-size:11.5px}
   .insight__stat,.case__num,.case__big small,.myth__k,
@@ -708,6 +672,12 @@ h3{font-weight:600;letter-spacing:-.014em;line-height:1.34;font-size:clamp(19px,
   .insight__head{align-items:flex-start;height:100%;box-sizing:border-box}
 }
 </style>
+<!-- Vercel Web Analytics (static-site install) -->
+<script>
+  window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };
+</script>
+<script defer src="/_vercel/insights/script.js"></script>
+<script defer src="/_vercel/speed-insights/script.js"></script>
 <!-- Meta Pixel Code -->
 <script>
 !function(f,b,e,v,n,t,s)
@@ -783,11 +753,6 @@ src="https://www.facebook.com/tr?id=2507394686442114&ev=PageView&noscript=1"
               <option>Still exploring</option>
             </select>
           </div>
-          <div class="consent">
-            <input type="checkbox" id="h-consent" name="consent" required>
-            <label for="h-consent">I consent to Claire Loh contacting me by phone call, SMS or WhatsApp about my property enquiry, including on a number registered with the DNC Registry.</label>
-          </div>
-          <p class="consent__err" role="alert">Please tick the box so I know I&rsquo;m allowed to contact you.</p>
           <button class="btn btn--lg" type="submit"><span class="btn__dot"></span>Send my details</button>
         </form>
       </div>
@@ -1179,13 +1144,8 @@ src="https://www.facebook.com/tr?id=2507394686442114&ev=PageView&noscript=1"
               <label for="f-msg">Anything I should know first (optional)</label>
               <textarea id="f-msg" name="message" placeholder="Budget range, timeline, preferred districts…"></textarea>
             </div>
-            <div class="consent">
-              <input type="checkbox" id="f-consent" name="consent" required>
-              <label for="f-consent">I consent to Claire Loh contacting me by phone call, SMS or WhatsApp about my property enquiry, including on a number registered with the DNC Registry.</label>
-            </div>
-            <p class="consent__err" role="alert">Please tick the box so I know I&rsquo;m allowed to contact you.</p>
             <button class="btn btn--light btn--lg" type="submit"><span class="btn__dot"></span>Send my details</button>
-            <p class="form__fine">Your details are used only to contact you about this enquiry &mdash; no mailing lists, and never sold on. This site uses the Meta Pixel to measure advertising. You can withdraw consent at any time by replying STOP or asking Claire to remove you.</p>
+            <p class="form__fine">Your details are used only to contact you about this enquiry &mdash; no mailing lists, and never sold on. This site uses the Meta Pixel to measure advertising.</p>
           </div>
           <div class="sent" role="status">
             <b>Thanks — your details are in.</b>
@@ -1229,7 +1189,6 @@ src="https://www.facebook.com/tr?id=2507394686442114&ev=PageView&noscript=1"
      form still works — it just doesn't send anywhere.
      --------------------------------------------------------------- */
   var THANK_YOU_URL = 'thank-you.html';
-  var CONSENT_TEXT = 'I consent to Claire Loh contacting me by phone call, SMS or WhatsApp about my property enquiry, including on a number registered with the DNC Registry.';
   var SHEET_ENDPOINT = 'https://script.google.com/macros/s/AKfycbyxcnlUhWXYFGW-mgIvFY3A67f2aKjN_B9zaeoaxur5nlDuz7pzS8vsp832jPGzkMWS/exec';
 
   function track(name, params, eventId){
@@ -1251,10 +1210,6 @@ src="https://www.facebook.com/tr?id=2507394686442114&ev=PageView&noscript=1"
     });
     payload.append('page', location.href);
     payload.append('source', source);
-    // DNC/PDPA evidence: what they agreed to, and when
-    payload.append('consent', 'yes');
-    payload.append('consent_text', CONSENT_TEXT);
-    payload.append('consent_at', new Date().toISOString());
     // Passed to the Conversions API so Meta can match the lead to a person
     payload.append('event_id', eventId || '');
     payload.append('fbp', cookie('_fbp'));
@@ -1289,16 +1244,6 @@ src="https://www.facebook.com/tr?id=2507394686442114&ev=PageView&noscript=1"
         if(bad){ ok = false; }
       });
 
-      var consent = form.querySelector('input[type="checkbox"][required]');
-      var consentErr = form.querySelector('.consent__err');
-      if(consent && !consent.checked){
-        consent.parentNode.classList.add('is-missing');
-        if(consentErr){ consentErr.classList.add('is-shown'); }
-        ok = false;
-      } else if(consent){
-        consent.parentNode.classList.remove('is-missing');
-        if(consentErr){ consentErr.classList.remove('is-shown'); }
-      }
 
       if(!ok){ return; }
 
