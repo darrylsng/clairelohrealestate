@@ -775,8 +775,8 @@ src="https://www.facebook.com/tr?id=2507394686442114&ev=PageView&noscript=1"
 
         <form class="lead-card rv rv--d2" id="hero-form" data-lead novalidate>
           <p class="lead-card__k">Free &middot; no obligation</p>
-          <p class="lead-card__offer">Get the Top 5 undervalued properties in CCR</p>
-          <p class="lead-card__sub">Five projects entering below the regional average, with the entry PSF and what makes each one undervalued.</p>
+          <p class="lead-card__offer">Depending on your budget, there are different products worth looking at.</p>
+          <p class="lead-card__sub">Entry PSF, layouts, and what makes each one undervalued. Tell me the budget and I&rsquo;ll share a one-pager on a specific product I&rsquo;d recommend.</p>
           <div class="field">
             <label for="h-name">Your name</label>
             <input id="h-name" name="name" type="text" autocomplete="name" required>
@@ -786,14 +786,17 @@ src="https://www.facebook.com/tr?id=2507394686442114&ev=PageView&noscript=1"
             <input id="h-phone" name="phone" type="tel" autocomplete="tel" inputmode="tel" required>
           </div>
           <div class="field">
-            <label for="h-goal">I&rsquo;m looking to</label>
-            <select id="h-goal" name="goal">
-              <option>Buy</option>
-              <option>Sell</option>
-              <option>Upgrade</option>
+            <label for="h-budget">My budget is</label>
+            <select id="h-budget" name="budget">
+              <option value="" disabled selected>Select a range</option>
+              <option>$1.5M - $2M</option>
+              <option>$2M - $2.5M</option>
+              <option>$2.5M - $3M</option>
+              <option>$3M - $3.5M</option>
+              <option>$3.5M - $5M</option>
             </select>
           </div>
-          <button class="btn btn--lg" type="submit"><span class="btn__dot"></span>Download the list here</button>
+          <button class="btn btn--lg" type="submit"><span class="btn__dot"></span>Find me my ideal property</button>
           <p class="lead-card__reply">Claire replies on WhatsApp, usually the same day.</p>
         </form>
       </div>
@@ -1166,18 +1169,21 @@ src="https://www.facebook.com/tr?id=2507394686442114&ev=PageView&noscript=1"
               </div>
             </div>
             <div class="field">
-              <label for="f-goal">I&rsquo;m looking to</label>
-              <select id="f-goal" name="goal">
-                <option>Buy</option>
-                <option>Sell</option>
-                <option>Upgrade</option>
-              </select>
+                <label for="f-budget">My budget is</label>
+                <select id="f-budget" name="budget">
+                  <option value="" disabled selected>Select a range</option>
+                  <option>$1.5M - $2M</option>
+                  <option>$2M - $2.5M</option>
+                  <option>$2.5M - $3M</option>
+                  <option>$3M - $3.5M</option>
+                  <option>$3.5M - $5M</option>
+                </select>
             </div>
             <div class="field">
               <label for="f-msg">Your budget, and anything I should know (optional)</label>
               <textarea id="f-msg" name="message" placeholder="Budget range, timeline, preferred districts&hellip;"></textarea>
             </div>
-            <button class="btn btn--light btn--lg" type="submit"><span class="btn__dot"></span>Download the list here</button>
+            <button class="btn btn--light btn--lg" type="submit"><span class="btn__dot"></span>Find me my ideal property</button>
             <p class="form__reply">Claire replies on WhatsApp, usually the same day.</p>
             <p class="form__fine">Your details are used only to contact you about this enquiry &mdash; no mailing lists, and never sold on. This site uses the Meta Pixel to measure advertising.</p>
           </div>
@@ -1243,10 +1249,13 @@ src="https://www.facebook.com/tr?id=2507394686442114&ev=PageView&noscript=1"
   function sendToSheet(form, eventId, source){
     if(SHEET_ENDPOINT.indexOf('PASTE_WEB_APP_URL') !== -1){ return; }
     var payload = new URLSearchParams();
-    ['name','phone','email','goal','message'].forEach(function(key){
+    ['name','phone','email','budget','message'].forEach(function(key){
       var field = form.elements[key];
       payload.append(key, field ? field.value : '');
     });
+    // the deployed sheet script reads 'goal'; mirror budget into it
+    var budgetField = form.elements['budget'];
+    payload.append('goal', budgetField ? budgetField.value : '');
     payload.append('page', location.href);
     payload.append('source', source);
     // Passed to the Conversions API so Meta can match the lead to a person
