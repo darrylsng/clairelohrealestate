@@ -7,7 +7,7 @@
 <meta name="description" content="Three shifts in the Singapore property market every buyer should understand before making a move — bigger units at higher PSF, record OCR pricing, and the closing CCR premium.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:opsz,wght@6..96,400..700&family=Poppins:ital,wght@0,100;0,300;0,400;0,500;0,600;0,700;1,400;1,500;1,700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:opsz,wght@6..96,400..700&family=Poppins:ital,wght@0,100;0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,700&display=swap" rel="stylesheet">
 <style>
 :root{
   --paper:#E7EAE4;
@@ -682,6 +682,7 @@ p{margin:0 0 1.05em}
 .ab__vt{font-weight:100}
 .ab__vc{font-weight:500}
 .ab__vert--m{display:none}
+.ab__sign{display:none}   /* frame 1:2 has no sign-off; frame 5:26 does */
 
 /* the copy column */
 .ab__copy{
@@ -699,39 +700,46 @@ p{margin:0 0 1.05em}
 .ab__b1{max-width:calc(755 * var(--s))}
 .ab__b2{max-width:calc(741 * var(--s));margin-top:clamp(16px,1.6vw,22px)}
 .ab__b2 em{font-style:italic;font-weight:600;color:var(--ink)}
-.ab__b2 b{font-weight:600;color:var(--ink)}
+.ab__copy b{font-weight:600;color:var(--ink)}
 
 /* ---------- mobile — Figma frame 5:26 (402 x 2201) ---------- */
 @media(max-width:1023px){
   .ab{--sm:calc(min(100vw, 520px) / 402);padding-block:0 clamp(48px,9vw,72px)}
   .ab__in{position:relative;max-width:520px;margin:0 auto;min-height:0}
 
-  /* three capsules of the photograph plus the lower blob */
+  /* full-bleed photograph, rounded off at the bottom */
   .ab__visual{
-    position:absolute;left:-4.229%;top:calc(-34 * var(--sm));
-    width:109.296%;aspect-ratio:439.367 / 549.208;
-    -webkit-mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 439.367 549.208' preserveAspectRatio='none'%3E%3Cg transform='translate(22,-57)' fill='%23fff'%3E%3Crect y='12' width='127.545' height='389' rx='62'/%3E%3Crect x='136.955' y='21' width='121.273' height='476' rx='60.6363'/%3E%3Crect x='267.636' width='123.364' height='382' rx='61.6818'/%3E%3Cpath d='M4.18183 467.5C4.18183 437.953 28.1346 414 57.6818 414H123.886C119.556 414 116.045 417.51 116.045 421.841V503.513C116.045 512.964 113.542 522.245 108.79 530.414L106.737 533.943C86.5001 568.733 36.5402 569.56 15.1628 535.459L12.3523 530.976C7.01346 522.459 4.18183 512.611 4.18183 502.559V467.5Z'/%3E%3C/g%3E%3C/svg%3E") 0 0 / 100% 100% no-repeat;
-            mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 439.367 549.208' preserveAspectRatio='none'%3E%3Cg transform='translate(22,-57)' fill='%23fff'%3E%3Crect y='12' width='127.545' height='389' rx='62'/%3E%3Crect x='136.955' y='21' width='121.273' height='476' rx='60.6363'/%3E%3Crect x='267.636' width='123.364' height='382' rx='61.6818'/%3E%3Cpath d='M4.18183 467.5C4.18183 437.953 28.1346 414 57.6818 414H123.886C119.556 414 116.045 417.51 116.045 421.841V503.513C116.045 512.964 113.542 522.245 108.79 530.414L106.737 533.943C86.5001 568.733 36.5402 569.56 15.1628 535.459L12.3523 530.976C7.01346 522.459 4.18183 512.611 4.18183 502.559V467.5Z'/%3E%3C/g%3E%3C/svg%3E") 0 0 / 100% 100% no-repeat;
+    position:absolute;left:-1.741%;top:calc(-17 * var(--sm));
+    width:101.741%;aspect-ratio:409 / 511;
+    -webkit-mask:none;mask:none;
+    border-bottom-left-radius:calc(6 * var(--sm));
+    border-bottom-right-radius:calc(41 * var(--sm));
+    overflow:hidden;
   }
 
   .ab__vert--d{display:none}
   .ab__vert--m{
-    display:block;position:absolute;left:35.323%;
-    top:calc(474.566 * var(--sm));transform:translateY(-50%);
+    display:block;position:absolute;left:auto;right:calc(19 * var(--sm));
+    width:auto;top:calc(448.3 * var(--sm));transform:translateY(-50%);
     margin:0;white-space:nowrap;pointer-events:none;
-    font-size:calc(41 * var(--sm));line-height:1.01;letter-spacing:-.05em;
-    color:#333819;
-    text-shadow:0 0 calc(21 * var(--sm)) rgba(0,0,0,.25);
+    font-size:calc(43 * var(--sm));line-height:1.01;letter-spacing:-.05em;
+    color:#E0BCA9;
+    text-shadow:0 0 calc(38 * var(--sm)) rgba(0,0,0,.78);
   }
 
   .ab__copy{
     margin-left:0;
-    padding-top:calc(535 * var(--sm));
-    padding-inline:calc(23 * var(--sm));
+    padding-top:calc(554 * var(--sm));
+    padding-inline:calc(19 * var(--sm));
   }
-  .ab__h{max-width:none;margin-bottom:clamp(14px,3.4vw,20px)}
+  .ab__h{display:none}            /* the revised frame drops the heading on mobile */
   .ab__b1,.ab__b2{max-width:none}
   .ab__b2{margin-top:clamp(22px,5vw,34px)}
+
+  .ab__sign{display:block;margin-top:clamp(24px,5.5vw,38px)}
+  .ab__sign-k{font-weight:500;color:var(--ink);margin:0}
+  .ab__sign-n{font-style:italic;margin:1.48em 0 0}
+  .ab__sign-n span{font-weight:300}
 }
 
 /* ---------- what to focus on ---------- */
@@ -1346,13 +1354,18 @@ src="https://www.facebook.com/tr?id=2507394686442114&ev=PageView&noscript=1"
 
         <div class="ab__b1">
           <p>I&rsquo;m Claire Loh, a Singapore real estate advisor with more than 11 years of experience helping homeowners navigate their first property purchase, HDB upgrades, private property investments and their next chapter in real estate.</p>
-          <p>Through my CVAS&trade; Method &mdash; Clear Value Advantage Secure &mdash; I help homeowners look beyond the marketing, understand the numbers and identify properties that make sense for their financial goals.</p>
+          <p>Through my <b>CVAS&trade; Method &mdash; Clear Value Advantage Secure</b> &mdash; I help homeowners look beyond the marketing, understand the numbers and identify properties that make sense for their financial goals.</p>
         </div>
 
         <div class="ab__b2">
           <p>My approach is simple:<br><em>Clarity before commitment. Not pressure at the point of signing.</em></p>
           <p>Before recommending a property, I want to understand your current position, your family&rsquo;s needs, your financial commitments and where you want to be in the next 5&ndash;10 years.<br>Because the goal isn&rsquo;t just to upgrade your home.<br>It&rsquo;s to elevate your assets, protect your hard-earned equity and move towards a more secure financial future.</p>
           <p><b>OUR NEXT MOVE STARTS WITH THE RIGHT CONVERSATION.</b><br>Let&rsquo;s find out what upgrading in 2027 could look like for you.</p>
+        </div>
+
+        <div class="ab__sign">
+          <p class="ab__sign-k">GET MY PERSONALIZED 2027 UPGRADE ANALYSIS</p>
+          <p class="ab__sign-n">Claire Loh<br><span>Singapore Real Estate Advisor</span><br><span>CVAS&trade; | Clear Value Advantage Secure</span></p>
         </div>
 
       </div>
