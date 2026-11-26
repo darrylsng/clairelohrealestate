@@ -327,6 +327,8 @@ p{margin:0 0 1.05em}
 .cred--long b{font-size:22px}
 .cred span{font-family:var(--mono);font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-45);line-height:1.5;display:block;margin-top:6px}
 
+.connect__k{display:block;margin-bottom:clamp(14px,1.6vw,20px)}
+
 /* ---------- form ---------- */
 .form{background:rgba(239,241,236,.06);border:1px solid rgba(239,241,236,.18);border-radius:20px;padding:clamp(24px,3.4vw,38px)}
 .field{margin-bottom:18px}
@@ -340,6 +342,20 @@ p{margin:0 0 1.05em}
 .field textarea{resize:vertical;min-height:96px}
 .field input:focus,.field select:focus,.field textarea:focus{outline:none;border-color:#E0A45A;background:rgba(14,50,57,.65)}
 .field select option{background:#0E3239;color:var(--chalk)}
+.field__tel{position:relative;display:flex;align-items:stretch}
+.field__cc{
+  display:flex;align-items:center;padding:0 11px 0 15px;
+  border:1px solid rgba(239,241,236,.22);border-right:none;
+  border-radius:11px 0 0 11px;background:rgba(14,50,57,.4);
+  font-size:16.5px;color:rgba(239,241,236,.6);
+  transition:border-color .2s,background .2s;
+}
+.field__tel input{border-radius:0 11px 11px 0!important;padding-left:10px!important}
+.field__tel:focus-within .field__cc{border-color:#E0A45A;background:rgba(14,50,57,.65)}
+.field__hint{
+  display:block;margin-top:7px;font-size:12.5px;line-height:1.5;
+  color:rgba(239,241,236,.45);
+}
 .field__row{display:grid;grid-template-columns:1fr 1fr;gap:14px}
 @media(max-width:560px){.field__row{grid-template-columns:1fr}}
 .form__reply{
@@ -1373,14 +1389,12 @@ src="https://www.facebook.com/tr?id=2507394686442114&ev=PageView&noscript=1"
 
   <!-- CONNECT -->
   <section class="section section--dark" id="connect">
-    <div class="wrap grid">
-      <aside class="rail">
-        <span class="eyebrow">Let's Connect</span>
-      </aside>
+    <div class="wrap">
       <div class="split" style="align-items:start">
         <div class="rv">
-          <h2>Get the Top 6 undervalued properties in CCR</h2>
-          <p class="lede" style="margin-top:22px">Six projects entering below the regional average &mdash; with the entry PSF, the layouts worth looking at, and what makes each one undervalued. Tell me your budget and I&rsquo;ll flag which of the six actually fit it.</p>
+          <span class="eyebrow connect__k">Let's Connect</span>
+          <h2>GET MY PERSONALISED 2027 UPGRADE ANALYSIS</h2>
+          <p class="lede" style="margin-top:22px">Let&rsquo;s have a comprehensive analysis of your portfolio, run through your numbers and see if your next move makes sense for you.</p>
           <ul class="contact__list">
             <li><b>Call</b><a class="contact__link" href="tel:+6591298431">+65 9129 8431</a></li>
             <li><b>WhatsApp</b><a class="contact__link" href="https://wa.me/6591298431?text=Hi%20Claire%2C%20I%20came%20across%20your%20property%20page%20and%20would%20like%20to%20find%20out%20more." target="_blank" rel="noopener noreferrer">+65 9129 8431<span class="contact__hint">Opens a chat</span></a></li>
@@ -1396,7 +1410,14 @@ src="https://www.facebook.com/tr?id=2507394686442114&ev=PageView&noscript=1"
               </div>
               <div class="field">
                 <label for="f-phone">WhatsApp number</label>
-                <input id="f-phone" name="phone" type="tel" autocomplete="tel" inputmode="tel" required>
+                <div class="field__tel">
+                  <span class="field__cc" aria-hidden="true">+65</span>
+                  <input id="f-phone" type="tel" autocomplete="tel" inputmode="numeric"
+                         maxlength="8" placeholder="9123 4567"
+                         aria-describedby="f-phone-hint" required>
+                </div>
+                <span id="f-phone-hint" class="field__hint">8 digits, starting with 8 or 9.</span>
+                <input type="hidden" name="phone" id="f-phone-full">
               </div>
             </div>
             <div class="field">
@@ -1545,6 +1566,29 @@ src="https://www.facebook.com/tr?id=2507394686442114&ev=PageView&noscript=1"
 
   // Both forms — the one in the hero and the one at the foot of the page —
   // run through the same handler, so they stay in step automatically.
+  /* ---- WhatsApp number: Singapore only, +65 is fixed and not editable ---- */
+  (function(){
+    var tel  = document.getElementById('f-phone');
+    var full = document.getElementById('f-phone-full');
+    if(!tel || !full){ return; }
+    function clean(v){
+      var d = String(v).replace(/\D/g, '');
+      // a pasted +65 / 65 prefix is dropped rather than eating the real digits
+      if(d.length > 8 && d.indexOf('65') === 0){ d = d.slice(2); }
+      return d.slice(0, 8);
+    }
+    function sync(){
+      var d = clean(tel.value);
+      if(tel.value !== d){ tel.value = d; }
+      // only a real SG mobile (8 digits, 8x or 9x) is ever submitted
+      full.value = /^[89][0-9]{7}$/.test(d) ? '+65 ' + d.slice(0,4) + ' ' + d.slice(4) : '';
+    }
+    tel.addEventListener('input', sync);
+    tel.addEventListener('paste', function(){ setTimeout(sync, 0); });
+    tel.addEventListener('blur', sync);
+    sync();
+  })();
+
   document.querySelectorAll('form[data-lead]').forEach(function(form){
     var source = form.id === 'hero-form' ? 'Hero form' : 'Contact form';
 
@@ -1555,7 +1599,12 @@ src="https://www.facebook.com/tr?id=2507394686442114&ev=PageView&noscript=1"
       form.querySelectorAll('input[required]').forEach(function(el){
         if(el.type === 'checkbox'){ return; }
         var bad = !el.value.trim() || (el.type === 'email' && el.value.indexOf('@') < 1);
+        if(el.id === 'f-phone'){ bad = !/^[89][0-9]{7}$/.test(el.value.trim()); }
         el.style.borderColor = bad ? '#E0A45A' : '';
+        if(el.id === 'f-phone'){
+          var cc = el.parentNode.querySelector('.field__cc');
+          if(cc){ cc.style.borderColor = bad ? '#E0A45A' : ''; }
+        }
         if(bad){ ok = false; }
       });
 
