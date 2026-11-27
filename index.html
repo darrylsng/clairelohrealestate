@@ -305,13 +305,13 @@ p{margin:0 0 1.05em}
   --sgap:14px;
   display:flex;gap:var(--sgap);margin-top:34px;
   align-items:flex-start;        /* each card keeps its own height */
+  --per:2;
   min-width:0;overflow-x:auto;overflow-y:hidden;
   scroll-snap-type:x mandatory;scroll-behavior:smooth;
   scrollbar-width:none;-ms-overflow-style:none;
 }
 .stories::-webkit-scrollbar{display:none}
 .stories:focus-visible{outline:2px solid var(--ochre);outline-offset:4px;border-radius:18px}
-@media(max-width:1099px){.stories{--per:2}}
 @media(max-width:700px){.stories{--per:1}}
 @media(prefers-reduced-motion:reduce){.stories{scroll-behavior:auto}}
 .story{
@@ -1669,12 +1669,15 @@ src="https://www.facebook.com/tr?id=2507394686442114&ev=PageView&noscript=1"
 
   // Both forms — the one in the hero and the one at the foot of the page —
   // run through the same handler, so they stay in step automatically.
-  /* ---- testimonials: horizontal rail with prev/next ---- */
+  /* ---- testimonials: horizontal rail, prev/next, and a slow auto-advance ---- */
   (function(){
     var rail = document.getElementById('stories-rail');
     if(!rail){ return; }
     var btns = document.querySelectorAll('.stories__btn');
     if(!btns.length){ return; }
+
+    var AUTO_MS = 4800, timer = null, stopped = false, visible = false;
+    var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
     function step(){
       var card = rail.querySelector('.story');
@@ -1682,26 +1685,61 @@ src="https://www.facebook.com/tr?id=2507394686442114&ev=PageView&noscript=1"
       var gap = parseFloat(getComputedStyle(rail).columnGap) || 0;
       return card.getBoundingClientRect().width + gap;
     }
+    function maxScroll(){ return rail.scrollWidth - rail.clientWidth; }
     function sync(){
-      var max = rail.scrollWidth - rail.clientWidth;
+      var max = maxScroll();
       Array.prototype.forEach.call(btns, function(b){
         var dir = +b.getAttribute('data-dir');
         b.disabled = max <= 1 || (dir < 0 ? rail.scrollLeft <= 1 : rail.scrollLeft >= max - 1);
       });
     }
+    function go(dir){
+      rail.scrollBy({left: dir * step(), behavior: reduce ? 'auto' : 'smooth'});
+    }
+
+    // auto-advance rightwards, rewinding once it reaches the last card
+    function tick(){
+      if(stopped || !visible){ return; }
+      if(rail.scrollLeft >= maxScroll() - 2){
+        rail.scrollTo({left:0, behavior: reduce ? 'auto' : 'smooth'});
+      } else {
+        go(1);
+      }
+    }
+    function play(){ if(!stopped && !reduce && !timer){ timer = setInterval(tick, AUTO_MS); } }
+    function pause(){ if(timer){ clearInterval(timer); timer = null; } }
+    function stopForGood(){ stopped = true; pause(); }   // the visitor has taken over
+
     Array.prototype.forEach.call(btns, function(b){
-      b.addEventListener('click', function(){
-        rail.scrollBy({left: (+b.getAttribute('data-dir')) * step(), behavior:'smooth'});
-      });
+      b.addEventListener('click', function(){ stopForGood(); go(+b.getAttribute('data-dir')); });
+      b.addEventListener('mouseenter', pause);
+      b.addEventListener('mouseleave', play);
     });
-    // arrow keys when the rail itself has focus
+    rail.addEventListener('mouseenter', pause);
+    rail.addEventListener('mouseleave', play);
+    rail.addEventListener('focusin', pause);
+    rail.addEventListener('focusout', play);
+    rail.addEventListener('pointerdown', stopForGood);
     rail.addEventListener('keydown', function(e){
       if(e.key !== 'ArrowLeft' && e.key !== 'ArrowRight'){ return; }
-      e.preventDefault();
-      rail.scrollBy({left:(e.key === 'ArrowRight' ? 1 : -1) * step(), behavior:'smooth'});
+      e.preventDefault(); stopForGood(); go(e.key === 'ArrowRight' ? 1 : -1);
     });
     rail.addEventListener('scroll', sync, {passive:true});
     window.addEventListener('resize', sync);
+
+    // only run while the section is actually on screen
+    if('IntersectionObserver' in window){
+      new IntersectionObserver(function(entries){
+        visible = entries[0].isIntersecting;
+        if(visible){ play(); } else { pause(); }
+      }, {threshold:0.25}).observe(rail);
+    } else {
+      visible = true; play();
+    }
+    document.addEventListener('visibilitychange', function(){
+      if(document.hidden){ pause(); } else { play(); }
+    });
+
     sync();
   })();
 
